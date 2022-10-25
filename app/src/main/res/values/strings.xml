@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">SadaParcel</string>
+    <string name="txt_header">SadaParcel</string>
+    <string name="home">Home</string>
+    <string name="cart">Cart</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="price">12.00</string>
+    <string name="stock">12 pcs</string>
+    <string name="name">White Square</string>
+</resources>
