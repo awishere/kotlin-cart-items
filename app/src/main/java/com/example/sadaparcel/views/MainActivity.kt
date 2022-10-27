@@ -1,8 +1,9 @@
-package com.example.sadaparcel
+package com.example.sadaparcel.views
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
+import com.example.sadaparcel.R
 import com.example.sadaparcel.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
