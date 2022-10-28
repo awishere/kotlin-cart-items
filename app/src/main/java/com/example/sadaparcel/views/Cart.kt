@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,6 +21,7 @@ class Cart : Fragment() {
 
 
     private lateinit var recyclerView: RecyclerView
+    private lateinit var total:TextView
 
     private var homeVM: HomeVM? = null
 
@@ -29,18 +31,22 @@ class Cart : Fragment() {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         homeVM = ViewModelProvider(this).get(HomeVM::class.java)
-        homeVM?.getRes()?.observe(viewLifecycleOwner, Observer { itemList ->
+        homeVM?.getCartList()?.observe(viewLifecycleOwner, Observer { cartList ->
+
         recyclerView = view.findViewById(R.id.recyclerViewCart)
         recyclerView.apply {
             recyclerView.layoutManager = layoutManager
             layoutManager = LinearLayoutManager(context)
             recyclerView.setHasFixedSize(true)
-            adapter= CartCardAdapter(itemList)
+            adapter= CartCardAdapter(cartList)
             recyclerView.adapter = adapter
+            total = view.findViewById(R.id.amountTotal)
+            total.text = homeVM?.getTotalPrice()?.value?.toInt().toString()
         }
-        })
 
+        })
     }
 
     override fun onCreateView(

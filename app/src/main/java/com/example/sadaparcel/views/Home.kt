@@ -11,13 +11,14 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sadaparcel.adapters.CardAdapter
 import com.example.sadaparcel.R
+import com.example.sadaparcel.adapters.ItemInterface
 import com.example.sadaparcel.models.Items
 import com.example.sadaparcel.viewmodels.HomeVM
 
 
-class Home : Fragment() {
+class Home : Fragment(), ItemInterface {
 
-  private lateinit var recyclerView: RecyclerView
+    private lateinit var recyclerView: RecyclerView
     private var homeVM: HomeVM? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,15 +27,15 @@ class Home : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         homeVM = ViewModelProvider(this).get(HomeVM::class.java)
-        homeVM?.getRes()?.observe(viewLifecycleOwner, Observer { itemList ->
-        recyclerView = view.findViewById(R.id.recyclerView)
-        recyclerView.apply {
-            recyclerView.layoutManager = layoutManager
-            layoutManager = GridLayoutManager(context,2)
-            recyclerView.setHasFixedSize(true)
-            adapter= CardAdapter(itemList)
-            recyclerView.adapter =adapter
-        }
+        homeVM?.getItemsList()?.observe(viewLifecycleOwner, Observer { itemList ->
+            recyclerView = view.findViewById(R.id.recyclerView)
+            recyclerView.apply {
+                recyclerView.layoutManager = layoutManager
+                layoutManager = GridLayoutManager(context, 2)
+                recyclerView.setHasFixedSize(true)
+                adapter = CardAdapter(itemList, this@Home)
+                recyclerView.adapter = adapter
+            }
         })
 
     }
@@ -45,8 +46,12 @@ class Home : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-      return inflater.inflate(R.layout.fragment_home, container, false)
+        return inflater.inflate(R.layout.fragment_home, container, false)
 
+    }
+
+    override fun addItem(items: Items) {
+        homeVM?.addItemToCart(items)!!
     }
 
 

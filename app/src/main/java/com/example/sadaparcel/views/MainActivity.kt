@@ -5,8 +5,10 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.example.sadaparcel.R
 import com.example.sadaparcel.databinding.ActivityMainBinding
+import com.example.sadaparcel.viewmodels.HomeVM
 
 class MainActivity : AppCompatActivity() {
+    private var homeVM: HomeVM? = null
     private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -16,7 +18,7 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavigationView.setOnItemSelectedListener {
             when(it.itemId){
                 R.id.home -> replaceFragment(Home())
-                R.id.cart -> replaceFragment(Cart())
+                R.id.cart ->  replaceFragment(Cart())
                 else ->{
 
                 }

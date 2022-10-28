@@ -26,8 +26,53 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewCart"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
             />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start">
+            <TextView
+                android:id="@+id/totalAmount"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:layout_weight="1"
+                android:text="@string/Total"
+                android:textColor="@color/black"
+                android:textSize="22sp"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                />
+            <TextView
+                android:id="@+id/amountTotal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:text="@string/Total"
+                android:textColor="@color/black"
+                android:textSize="22sp"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:layout_weight="0.1"
+            android:gravity="center">
+            <Button
+                android:layout_width="match_parent"
+                android:text="@string/confirm_order"
+                android:layout_height="wrap_content"
+                />
+
+        </LinearLayout>
     </LinearLayout>
 
 </FrameLayout>

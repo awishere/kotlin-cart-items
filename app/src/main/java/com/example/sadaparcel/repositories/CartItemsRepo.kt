@@ -3,6 +3,7 @@ package com.example.sadaparcel.repositories
 import androidx.lifecycle.LiveData
 
 import androidx.lifecycle.MutableLiveData
+import com.example.sadaparcel.R
 import com.example.sadaparcel.models.CartItems
 import com.example.sadaparcel.models.Items
 
@@ -11,7 +12,7 @@ class CartRepo {
     companion object{
         private var instance: CartRepo? = null
         private val mutableCart: MutableLiveData<List<CartItems>> = MutableLiveData<List<CartItems>>()
-        private val mutableTotalPrice: MutableLiveData<Double?> = MutableLiveData<Double?>()
+        private val mutableTotalPrice: MutableLiveData<Double> = MutableLiveData<Double>()
 
         fun getInstance(): CartRepo {
             if (instance == null){
@@ -23,54 +24,113 @@ class CartRepo {
 
 
 
-    fun getCart(): LiveData<List<CartItems>> {
+    fun getCart():LiveData<List<CartItems>> {
         if (mutableCart.value == null) {
             initCart()
         }
         return mutableCart
     }
 
-    private fun initCart() {
-        mutableCart.postValue(ArrayList<CartItems>())
+     private fun initCart() {
+        mutableCart.setValue(ArrayList())
+         println("INIT")
+         calculateCartTotal()
     }
 
     fun addItemToCart(items: Items): Boolean {
         if (mutableCart.value == null) {
+            println("going for init")
             initCart()
         }
         if(items.stock < 1){
             return false
         }
-        val cartItemList: MutableList<CartItems> = ArrayList(mutableCart.value!!)
+
+        val cartItemList: MutableList<CartItems> =ArrayList(mutableCart.value!!)
+
         for (cartItem in cartItemList) {
-            if (cartItem.cartItems.id?.equals(items.id)!!) {
+//            println("CART ID: "+cartItem.cartItems.id)
+//            println("CART STOCK: "+cartItem.stock)
+            println("ITEM ID: ${items.id}")
+            if (cartItem.cartItems.id==items.id){
+                println("Inside for")
                 if (cartItem.stock == 12) {
                     return false
                 }
                 val index = cartItemList.indexOf(cartItem)
                 cartItem.stock += 1
                 cartItemList[index] = cartItem
-                mutableCart.postValue(cartItemList)
+                mutableCart.value = cartItemList
+                calculateCartTotal()
                 return true
 
             }
         }
-        val cartItem: CartItems = CartItems(items,1)
+
+        val cartItem = CartItems(items,1)
         cartItemList.add(cartItem)
         println(cartItemList)
-        mutableCart.postValue(cartItemList)
+        println("ITEM ID: ${items.id}")
+        mutableCart.value = cartItemList
+        calculateCartTotal()
         return true
     }
 
 
-        fun removeItemFromCart(cartItem: CartItems) {}
+        fun removeItemFromCart(cartItem: CartItems): Boolean {
+            if (mutableCart.value == null) {
+                initCart()
+            }
+            val cartItemList: MutableList<CartItems> = ArrayList(mutableCart.value!!)
+            return if(cartItemList.contains(cartItem)){
+                cartItemList.remove(cartItem)
+                mutableCart.value = cartItemList
+                calculateCartTotal()
+                true
+            }else{
+                false
 
-        fun changeQuantity(cartItem: CartItems, quantity: Int) {}
+            }
+        }
 
-        private fun calculateCartTotal() {}
+        fun changeQuantity(cartItem: CartItems, quantity: Int): Boolean {
+            if (mutableCart.value == null) {
+                initCart()
+            }
+            val cartItemList: MutableList<CartItems> = ArrayList(mutableCart.value!!)
+            val updatedItems = CartItems(cartItem.cartItems,quantity)
+            println(mutableCart.value)
+            return if(cartItemList.contains(cartItem)){
+                cartItemList[cartItemList.indexOf(cartItem)]= updatedItems
+                mutableCart.value = cartItemList
+                calculateCartTotal()
+                true
+            }else{
+                false
+            }
+        }
+
+        private fun calculateCartTotal() {
+            if (mutableCart.value == null) {
+                println("no here")
+              return
+            }
+
+            var total = 0.0
+            val cartItemList: List<CartItems> = ArrayList(mutableCart.value!!)
+            for (cartItem:CartItems in cartItemList){
+                println(cartItem.stock)
+                total += cartItem.cartItems.price * cartItem.stock
+                println(total)
+            }
+            mutableTotalPrice.postValue(total)
+        }
 
 
-        fun totalPrice(): LiveData<Double?> {
+        fun totalPrice(): LiveData<Double> {
+            if (mutableTotalPrice.value == null) {
+                mutableTotalPrice.postValue(0.0)
+            }
             return mutableTotalPrice
         }
 }
