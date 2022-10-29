@@ -41,7 +41,8 @@ class HomeItemsRepo {
             "Pink Square",
             14.00,
             12,
-            2
+            2,
+            true
         )
         val item3 = Items(
             "Red Square",

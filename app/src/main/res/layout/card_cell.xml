@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -13,7 +14,21 @@
         android:clickable="true"
         app:cardElevation="7dp"
         android:focusable="true">
-    <LinearLayout
+
+
+        <Button
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:id="@+id/discountBtn"
+            android:layout_gravity="start"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/ic_baseline_info_24"
+            >
+        </Button>
+
+
+        <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -31,9 +46,10 @@
         android:layout_width="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_height="wrap_content"
+
         android:gravity="start"
         android:text="@string/name"
-        android:textColor="@color/black"
+
         android:textSize="14sp"
         android:textStyle="normal"/>
     <LinearLayout
@@ -53,7 +69,7 @@
         android:layout_height="wrap_content"
         android:gravity="start"
         android:text="@string/price"
-        android:textColor="@color/black"
+
         android:textSize="14sp"
         android:textStyle="bold"/>
         <TextView
@@ -63,7 +79,7 @@
             android:layout_height="wrap_content"
             android:gravity="start"
             android:text="@string/stock"
-            android:textColor="@color/black"
+
             android:textSize="11sp"
             android:textStyle="normal"/>
     </LinearLayout>

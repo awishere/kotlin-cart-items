@@ -5,6 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.ImageButton
+import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
@@ -20,9 +23,6 @@ class Home : Fragment(), ItemInterface {
 
     private lateinit var recyclerView: RecyclerView
     private var homeVM: HomeVM? = null
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -50,7 +50,7 @@ class Home : Fragment(), ItemInterface {
 
     }
 
-    override fun addItem(items: Items) {
+    override fun onClick(items: Items) {
         homeVM?.addItemToCart(items)!!
     }
 

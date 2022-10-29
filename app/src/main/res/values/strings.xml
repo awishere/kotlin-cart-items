@@ -11,4 +11,6 @@
     <string name="Total">Total</string>
     <string name="confirm_order">Confirm Order</string>
     <string name="quantity">quantity</string>
+    <string name="back_to_home">Back to Home</string>
+    <string name="thank_you_for_the_order">Thank you for the Order</string>
 </resources>

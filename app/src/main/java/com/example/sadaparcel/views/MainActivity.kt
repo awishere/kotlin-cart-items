@@ -16,10 +16,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         replaceFragment(Home())
         binding.bottomNavigationView.setOnItemSelectedListener {
-            when(it.itemId){
+            when (it.itemId) {
                 R.id.home -> replaceFragment(Home())
-                R.id.cart ->  replaceFragment(Cart())
-                else ->{
+                R.id.cart -> replaceFragment(Cart())
+                else -> {
 
                 }
             }
@@ -27,10 +27,10 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun replaceFragment(fragment: Fragment){
-        val fragmentManager= supportFragmentManager
-        val fragmentTransaction= fragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.frame_layout,fragment)
+    private fun replaceFragment(fragment: Fragment) {
+        val fragmentManager = supportFragmentManager
+        val fragmentTransaction = fragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.frame_layout, fragment)
         fragmentTransaction.commit()
     }
 }

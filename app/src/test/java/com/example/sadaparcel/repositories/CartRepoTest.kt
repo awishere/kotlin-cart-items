@@ -33,7 +33,11 @@ class CartRepoTest{
         val mutableCartList = cartRepo.getCart()
         assertThat(mutableCartList.value).isNotNull()
     }
-
+    @Test
+    fun getTotalWhenCartEmpty(){
+        val emptyCartTotal = cartRepo.totalPrice()
+        assertThat(emptyCartTotal.value).isEqualTo(0.0)
+    }
     @Test
     fun isStockFinished(){
         val item = Items(
@@ -86,9 +90,6 @@ class CartRepoTest{
         assertThat(updateCartItem).isEqualTo(false)
     }
 
-    @Test
-    fun getTotalWhenCartEmpty(){
-        val emptyCartTotal = cartRepo.totalPrice()
-        assertThat(emptyCartTotal.value).isEqualTo(0.0)
-    }
+
+
 }

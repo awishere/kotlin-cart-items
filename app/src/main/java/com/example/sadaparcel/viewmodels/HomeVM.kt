@@ -33,8 +33,8 @@ class HomeVM() : ViewModel() {
     fun removeItemFromCart(cartItems: CartItems): Boolean? {
         return cartRepo?.removeItemFromCart(cartItems)
     }
-    fun changeQuantity(cartItems: CartItems,quantity:Int){
-        cartRepo?.changeQuantity(cartItems,quantity)
+    fun changeQuantity(cartItems: CartItems,quantity:Int):Boolean?{
+        return cartRepo?.changeQuantity(cartItems,quantity)
     }
     fun getTotalPrice(): LiveData<Double> {
         return cartRepo?.totalPrice()!!
