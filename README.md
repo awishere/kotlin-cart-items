@@ -1,6 +1,6 @@
 # kotlin-cart-items
 
-=====SadaParcel App with Kotlin======
+
 
 
 Stories:
